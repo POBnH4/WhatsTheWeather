@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+            android:defaultValue="false"
+            android:title="Temperature displayed"
+            android:key="temperature_preference_key"
+            android:summary="Change measure"
+            android:summaryOn="Fahrenheit"
+            android:summaryOff="Celsius"/>
+    <EditTextPreference
+            android:defaultValue="password"
+            android:singleLine="true"
+            android:title="Change name"
+            android:key="display_password_pref"
+            android:summary="Change your password"/>
+    <EditTextPreference
+            android:defaultValue="username"
+            android:singleLine="true"
+            android:title="Change your username"
+            android:key="display_name_pref"
+            android:summary="Default user"/>
+</PreferenceScreen>

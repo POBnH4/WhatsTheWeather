@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/preferredLocationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context = "com.example.peterboncheff.coursework.PreferredLocationActivity">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    >
+        <Button
+                android:id="@+id/btn_add"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add"
+                android:layout_alignParentEnd="true" android:layout_alignParentBottom="true"/>
+        <Button
+                android:id="@+id/btn_updateSelected"
+                android:layout_width="131dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Update"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+        <Button
+                android:id="@+id/btn_deleteSelected"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:layout_alignParentBottom="true" android:layout_alignParentStart="true"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView2"
+                android:layout_toStartOf="@+id/btn_updateSelected" android:layout_alignBaseline="@+id/btn_add"/>
+        <Spinner
+                android:id="@+id/sp_modules"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_weight="1" android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="85dp"/>
+        <TextView
+                android:text="15°"
+                android:textSize="35dp"
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/currentCityTemperature"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"/>
+        <TextView
+                android:text="Last updated:  10/10/2018"
+                android:layout_width="184dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/currentCityLastUpdated" android:layout_below="@+id/currentCityTemperature"
+                android:layout_centerHorizontal="true"/>
+        <Button
+                android:text="@string/action_settings"
+                android:layout_width="53dp"
+                android:layout_height="36dp" android:layout_alignParentEnd="true" android:layout_marginEnd="27dp"
+                android:id="@+id/buttonSetMainCity" android:layout_alignBaseline="@+id/currentCityTemperature"/>
+    </RelativeLayout>
+
+    <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:padding="4dp"-->
+            <!--android:scrollbars="vertical"-->
+            <!--android:id="@+id/recyclerView"/>-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:src="@android:drawable/ic_input_add"-->
+            <!--android:layout_width="68dp"-->
+            <!--android:layout_height="61dp"-->
+            <!--android:clickable="true"-->
+            <!--android:id="@+id/floatingActionButton"-->
+            <!--android:layout_marginBottom="45dp"-->
+            <!--android:layout_marginEnd="33dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentBottom="true"/>-->
+
+</RelativeLayout>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:background="#D33F20"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:id="@+id/mainLayout">
+
+    <TextView
+            android:text="London, UK"
+            android:layout_width="96dp"
+            android:layout_height="28dp"
+            android:id="@+id/currentLocation"
+            android:textStyle="bold"
+            tools:textSize="@dimen/activity_horizontal_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.522"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="55dp" android:layout_marginBottom="335dp"
+            app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek"/>
+    <TextView
+            android:text="Last updated: 10.10"
+            android:layout_width="151dp"
+            android:layout_height="20dp"
+            android:textStyle="bold"
+            android:id="@+id/lastUpdatedTextField"
+            app:layout_constraintTop_toBottomOf="@+id/currentLocation"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.502"/>
+    <HorizontalScrollView
+            android:layout_width="400dp"
+            android:layout_height="101dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/daysOfTheWeek"
+            android:layout_marginBottom="4dp" app:layout_constraintTop_toBottomOf="@+id/currentLocation">
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:orientation="horizontal">
+
+            <LinearLayout android:layout_width="100dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:id="@+id/dayOfWeekOneLayout">
+                <TextView
+                        android:text="\t\tMonday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekOneName"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="57dp"
+                        app:srcCompat="@drawable/cloudy"
+                        android:id="@+id/dayOfWeekOneIcon"/>
+                <TextView
+                        android:text="\t\t10.4/14.2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekOneTemp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="100dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:id="@+id/dayOfWeekTwoLayout">
+                <TextView
+                        android:text="\t\tTuesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekTwoName"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp" app:srcCompat="@drawable/cloudy"
+                        android:id="@+id/dayOfWeekTwoIcon"/>
+                <TextView
+                        android:text="\t\t13.2/15.3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekTwoTemp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="100dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:id="@+id/dayOfWeekThreeLayout">
+
+                <TextView
+                        android:text="\tWednesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekThreeName"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="58dp"
+                        app:srcCompat="@drawable/rainy"
+                        android:id="@+id/dayOfWeekThreeIcon"/>
+                <TextView
+                        android:text="\t\t9.7/11.1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekThreeTemp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="100dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:id="@+id/dayOfWeekFourLayout">
+                <TextView
+                        android:text="\t\tThursday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekFourName"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="59dp"
+                        app:srcCompat="@drawable/partly_cloudy"
+                        android:id="@+id/dayOfWeekFourIcon"/>
+                <TextView
+                        android:text="\t\t15.2/17.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dayOfWeekFourTemp"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="100dp"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:id="@+id/dayOfWeekFiveLayout">
+                <TextView
+                        android:text="\t\tThursday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/dayOfWeekFiveName"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="59dp" app:srcCompat="@drawable/partly_cloudy"
+                        android:id="@+id/dayOfWeekFiveIcon"/>
+                <TextView
+                        android:text="\t\t16.2/18.9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/dayOfWeekFiveTemp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+    <TextView
+            android:text="8 km"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:id="@+id/windTextView"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperature"
+            app:layout_constraintVertical_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="129dp" app:layout_constraintEnd_toStartOf="@+id/pressureTextView"
+            android:layout_marginEnd="47dp"/>
+    <TextView
+            android:text="54"
+            android:layout_width="31dp"
+            android:layout_height="17dp"
+            android:id="@+id/pressureTextView"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperature"
+            app:layout_constraintVertical_bias="0.437"
+            app:layout_constraintStart_toEndOf="@+id/windTextView"
+            app:layout_constraintEnd_toStartOf="@+id/humidityTextView" android:layout_marginEnd="48dp"
+    />
+    <TextView
+            android:text="4.4"
+            android:layout_width="37dp"
+            android:layout_height="23dp"
+            android:id="@+id/humidityTextView" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/currentTemperature"
+            app:layout_constraintVertical_bias="0.446" app:layout_constraintStart_toEndOf="@+id/pressureTextView"
+    />
+    <Button
+            android:layout_width="29dp"
+            android:layout_height="27dp"
+            android:id="@+id/refreshButton" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="28dp"
+            app:layout_constraintBottom_toTopOf="@+id/currentTemperature" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/mainIcon" app:layout_constraintHorizontal_bias="0.712"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintVertical_bias="0.942"/>
+    <TextView
+            android:text="11.3°"
+            android:layout_width="85dp"
+            android:layout_height="43dp"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:id="@+id/currentTemperature"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:textAppearance="@style/TextAppearance.AppCompat"
+            app:layout_constraintTop_toBottomOf="@+id/mainIcon" app:layout_constraintHorizontal_bias="0.501"/>
+    <ImageView
+            android:layout_width="146dp"
+            android:layout_height="100dp" app:srcCompat="@drawable/sunnyy"
+            android:id="@+id/mainIcon" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/lastUpdatedTextField"
+    />
+    <ImageView
+            android:layout_width="28dp"
+            android:layout_height="29dp" app:srcCompat="@drawable/wind"
+            android:id="@+id/windIcon" app:layout_constraintEnd_toStartOf="@+id/windTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/currentTemperature"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek"
+            app:layout_constraintVertical_bias="0.392"/>
+    <ImageView
+            android:layout_width="42dp"
+            android:layout_height="45dp" app:srcCompat="@drawable/pressure"
+            android:id="@+id/thermometerIcon" app:layout_constraintStart_toEndOf="@+id/windTextView"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperature" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek"
+            app:layout_constraintEnd_toStartOf="@+id/pressureTextView"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.336"/>
+    <ImageView
+            android:layout_width="31dp"
+            android:layout_height="38dp"
+            app:srcCompat="@drawable/humidity"
+            android:id="@+id/humidityIcon"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/currentTemperature"
+            app:layout_constraintStart_toEndOf="@+id/pressureTextView"
+            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/daysOfTheWeek"
+            app:layout_constraintEnd_toStartOf="@+id/humidityTextView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.418"/>
+</android.support.constraint.ConstraintLayout>

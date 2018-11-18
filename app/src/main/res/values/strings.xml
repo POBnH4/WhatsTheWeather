@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Coursework</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_preferred_location">PreferredLocationActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_information">InformationActivity</string>
+    <string name="title_activity_asd">asd</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="item_1">London, UK</string>
+    <string name="mostra_documento">Mostra documento</string>
+    <string name="aggiungi_ad_un_contenitore">Aggiungi ad un contenitore</string>
+    <string name="elimina_documento">Elimina documento</string>
+    <string name="details">details</string>
+    <string name="delete">delete</string>
+    <string name="set_as_main">Set as main</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="preferences">Preferences</string>
+    <string name="search">Search</string>
+    <string name="spinner">spinner</string>
+    <string name="activityicon">activityIcon</string>
+    <string name="actionbarspinner">actionBarSpinner</string>
+
+</resources>

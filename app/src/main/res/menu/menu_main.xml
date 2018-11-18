@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.example.peterboncheff.coursework.MainActivity">
+
+    <item android:id="@+id/actionBarMenuSearch"
+          android:title="@string/search"
+          android:icon="@android:drawable/ic_menu_search"
+          app:showAsAction="always"
+          app:actionViewClass="android.support.v7.widget.SearchView" tools:ignore="AlwaysShowAction"/>
+
+    <item android:id="@+id/actionBarSpinner"
+          android:title = "@string/actionbarspinner"
+          app:showAsAction="always"
+          app:actionViewClass="android.widget.Spinner"/>
+
+    <item android:title="@string/preferences"
+          android:id="@+id/preferencesItem"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+    <item android:title="@string/settings"
+          android:id="@+id/settingsItem"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+    <item android:title="@string/logout"
+          android:id="@+id/logOut"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+</menu>
