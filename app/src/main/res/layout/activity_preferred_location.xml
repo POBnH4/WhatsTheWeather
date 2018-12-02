@@ -1,85 +1,448 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+                xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/preferredLocationLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="@drawable/pref_location"
                 tools:context = "com.example.peterboncheff.coursework.PreferredLocationActivity">
 
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-    >
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_height="wrap_content"
+                                                 android:layout_alignParentStart="true"
+                                                 android:layout_alignParentTop="true">
+
+        <Spinner
+                android:id="@+id/sp_modules"
+                android:layout_width="150dp"
+                android:layout_height="49dp"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+        />
+        <Spinner
+                android:layout_width="115dp"
+                android:layout_height="49dp"
+                android:id="@+id/typesSpinner"
+                android:textColor="#FFFFFF"
+                app:layout_constraintEnd_toStartOf="@+id/sp_modules"
+                android:layout_marginStart="8dp" app:layout_constraintStart_toEndOf="@+id/preferenceLayoutSearch"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tableLayout" app:layout_constraintVertical_bias="0.0"/>
+        <EditText
+                android:layout_width="98dp"
+                android:layout_height="47dp"
+                android:inputType="textPersonName"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:ems="10"
+                android:id="@+id/preferenceLayoutSearch"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        />
+        <TextView
+                android:text="Monday"
+                android:layout_width="105dp"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_height="29dp"
+                android:id="@+id/prefLocationDayOne"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationDayOneTemp" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginTop="56dp" app:layout_constraintTop_toBottomOf="@+id/preferenceLayoutSearch"
+                app:layout_constraintHorizontal_bias="1.0"/>
+        <TextView
+                android:text="Tuesday"
+                android:layout_width="105dp"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_height="30dp"
+                android:textStyle="bold"
+                android:id="@+id/prefLocationDayTwo"
+                android:layout_marginTop="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayOne"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationDayTwoTemp"
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"/>
+        <TextView
+                android:text="Wednesday"
+                android:layout_width="105dp"
+                android:layout_height="29dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:id="@+id/prefLocationDayThree" android:layout_marginTop="48dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayTwo"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationDayThreeTemp"
+                app:layout_constraintHorizontal_chainStyle="packed" android:layout_marginEnd="12dp"/>
+        <TextView
+                android:text="Thursday"
+                android:layout_width="105dp"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_height="28dp"
+                android:id="@+id/prefLocationDayFour"
+                android:layout_marginTop="48dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayThree"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationDayFourTemp"
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.0"/>
+        <TextView
+                android:text="Friday"
+                android:layout_width="104dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_height="25dp"
+                android:id="@+id/prefLocationDayFive" android:layout_marginTop="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayFour"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationDayFiveTemp" android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"/>
+        <ImageView
+                android:layout_width="29dp"
+                android:layout_height="30dp"
+                android:tint="@color/white"
+                app:srcCompat="@drawable/wind"
+                android:id="@+id/prefLocationImageWind" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/typesSpinner" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/prefLocationImageHumidity"
+                android:layout_marginEnd="8dp" app:layout_constraintHorizontal_bias="0.989"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+                app:layout_constraintVertical_bias="0.555"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="68dp"
+                android:layout_height="27dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:id="@+id/prefLocationDayOneTemp" app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+                android:layout_marginEnd="8dp" android:layout_marginTop="56dp"
+                app:layout_constraintTop_toBottomOf="@+id/preferenceLayoutSearch"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="67dp"
+                android:layout_height="26dp"
+                android:textColor="#FFFFFF"
+                android:id="@+id/prefLocationDayTwoTemp" android:layout_marginTop="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayOneTemp"
+                app:layout_constraintEnd_toStartOf="@+id/tableLayout" android:layout_marginEnd="8dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="66dp"
+                android:layout_height="24dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:id="@+id/prefLocationDayThreeTemp"
+                app:layout_constraintStart_toEndOf="@+id/prefLocationDayThree"
+                android:layout_marginStart="12dp" android:layout_marginTop="56dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayTwoTemp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="66dp"
+                android:layout_height="26dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:id="@+id/prefLocationDayFourTemp"
+                app:layout_constraintEnd_toStartOf="@+id/tableLayout" android:layout_marginEnd="8dp"
+                android:layout_marginTop="52dp" app:layout_constraintTop_toBottomOf="@+id/prefLocationDayThreeTemp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="63dp"
+                android:layout_height="23dp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:id="@+id/prefLocationDayFiveTemp" android:layout_marginTop="52dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayFour"
+                app:layout_constraintEnd_toStartOf="@+id/tableLayout" android:layout_marginEnd="12dp"
+        />
+        <ImageView
+                android:layout_width="29dp"
+                android:layout_height="26dp" app:srcCompat="@drawable/humidity"
+                android:id="@+id/prefLocationImageHumidity"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationImagePressure"
+                android:layout_marginEnd="16dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/typesSpinner" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tableLayout" app:layout_constraintVertical_bias="0.384"
+                android:contentDescription="@string/humidityImage"/>
+        <ImageView
+                android:layout_width="33dp"
+                android:layout_height="35dp" app:srcCompat="@drawable/pressure"
+                android:id="@+id/prefLocationImagePressure"
+                android:tint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/sp_modules"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationImageWindDirection" android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+                android:contentDescription="@string/pressureImage" app:layout_constraintVertical_bias="1.0"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="29dp" app:srcCompat="@drawable/ic_wind_direction"
+                android:id="@+id/prefLocationImageWindDirection"
+                android:tint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/sp_modules"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+                android:contentDescription="@string/windDirectionImage"/>
+        <TableLayout android:layout_width="192dp" android:layout_height="356dp"
+                     android:id="@+id/tableLayout" android:layout_marginEnd="8dp"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toEndOf="@+id/prefLocationDayThree" android:layout_marginStart="8dp"
+                     app:layout_constraintHorizontal_bias="1.0" android:layout_marginTop="52dp"
+                     app:layout_constraintTop_toBottomOf="@+id/sp_modules" android:layout_marginBottom="8dp"
+                     app:layout_constraintBottom_toTopOf="@+id/btn_updateSelected">
+            <TableRow
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content" tools:layout_editor_absoluteY="96dp"
+                    tools:layout_editor_absoluteX="217dp">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="33dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayOneWind"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="35dp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayOneHumidity"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="28dp" android:id="@+id/prefLocationDayOnePressure"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="300dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="match_parent" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="337dp" android:id="@+id/prefLocationDayOneWindDirection"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="156dp"
+                    android:layout_height="324dp"
+                    android:layout_marginTop="50dp"
+                    tools:layout_editor_absoluteY="96dp"
+                    tools:layout_editor_absoluteX="217dp">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="33dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayTwoWind"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="35dp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayTwoHumidity"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="28dp" android:id="@+id/prefLocationDayTwoPressure"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="300dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="31dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="29dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="337dp" android:id="@+id/prefLocationDayTwoWindDirection"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="156dp"
+                    android:layout_height="324dp"
+                    android:layout_marginTop="50dp"
+                    tools:layout_editor_absoluteY="96dp"
+                    tools:layout_editor_absoluteX="217dp">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="33dp"
+                        android:layout_height="28dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayThreeWind"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="35dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayThreeHumidity"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="30dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" android:id="@+id/prefLocationDayThreePressure"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="300dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="31dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="29dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="337dp" android:id="@+id/prefLocationDayThreeWindDirection"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="156dp"
+                    android:layout_height="324dp"
+                    android:layout_marginTop="50dp"
+                    tools:layout_editor_absoluteY="96dp"
+                    tools:layout_editor_absoluteX="217dp">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="33dp"
+                        android:layout_height="28dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayFourWind"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="35dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayFourHumidity"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="30dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" android:id="@+id/prefLocationDayFourPressure"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="300dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="31dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="29dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="337dp" android:id="@+id/prefLocationDayFourWindDirection"/>
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="156dp"
+                    android:layout_height="304dp"
+                    android:layout_marginTop="50dp"
+                    tools:layout_editor_absoluteY="96dp"
+                    tools:layout_editor_absoluteX="217dp">
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="33dp"
+                        android:layout_height="28dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayFiveWind"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="35dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayFiveHumidity"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="30dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="8dp"
+                        android:layout_height="28dp" android:id="@+id/prefLocationDayFivePressure"
+                        tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="300dp"/>
+                <TextView
+                        android:text="TextView"
+                        android:layout_width="31dp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_height="29dp" tools:layout_editor_absoluteY="98dp"
+                        tools:layout_editor_absoluteX="337dp" android:id="@+id/prefLocationDayFiveWindDirection"/>
+            </TableRow>
+
+        </TableLayout>
+        <TextView
+                android:text="Last updated: 06/11/2018"
+                android:layout_width="171dp"
+                android:layout_height="21dp"
+                android:textColor="#FFFFFF"
+                android:id="@+id/prefLocationLastUpdated"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/preferenceLayoutSearch"
+                app:layout_constraintEnd_toStartOf="@+id/prefLocationImageWind" android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/prefLocationDayOneTemp"
+                app:layout_constraintHorizontal_bias="0.0" app:layout_constraintVertical_bias="0.2"/>
+
         <Button
                 android:id="@+id/btn_add"
                 android:layout_width="127dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Add"
-                android:layout_alignParentEnd="true" android:layout_alignParentBottom="true"/>
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/tableLayout" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0"/>
         <Button
                 android:id="@+id/btn_updateSelected"
-                android:layout_width="131dp"
+                android:layout_width="121dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Update"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add"
+                android:layout_marginEnd="4dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/prefLocationDayFiveTemp"
+                app:layout_constraintVertical_bias="1.0"/>
         <Button
                 android:id="@+id/btn_deleteSelected"
                 android:layout_width="127dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Delete"
-                android:layout_alignParentBottom="true" android:layout_alignParentStart="true"/>
-        <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView2"
-                android:layout_toStartOf="@+id/btn_updateSelected" android:layout_alignBaseline="@+id/btn_add"/>
-        <Spinner
-                android:id="@+id/sp_modules"
-                android:layout_width="match_parent"
-                android:layout_height="49dp"
-                android:layout_weight="1" android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="85dp"/>
-        <TextView
-                android:text="15°"
-                android:textSize="35dp"
-                android:layout_width="66dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/currentCityTemperature"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="12dp"
-                android:layout_centerHorizontal="true"/>
-        <TextView
-                android:text="Last updated:  10/10/2018"
-                android:layout_width="184dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/currentCityLastUpdated" android:layout_below="@+id/currentCityTemperature"
-                android:layout_centerHorizontal="true"/>
-        <Button
-                android:text="@string/action_settings"
-                android:layout_width="53dp"
-                android:layout_height="36dp" android:layout_alignParentEnd="true" android:layout_marginEnd="27dp"
-                android:id="@+id/buttonSetMainCity" android:layout_alignBaseline="@+id/currentCityTemperature"/>
-    </RelativeLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_updateSelected" android:layout_marginEnd="8dp"
+                app:layout_constraintHorizontal_bias="0.0" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/prefLocationDayFive"
+                app:layout_constraintVertical_bias="1.0"/>
 
-    <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:padding="4dp"-->
-            <!--android:scrollbars="vertical"-->
-            <!--android:id="@+id/recyclerView"/>-->
-    <!--<android.support.design.widget.FloatingActionButton-->
-            <!--android:src="@android:drawable/ic_input_add"-->
-            <!--android:layout_width="68dp"-->
-            <!--android:layout_height="61dp"-->
-            <!--android:clickable="true"-->
-            <!--android:id="@+id/floatingActionButton"-->
-            <!--android:layout_marginBottom="45dp"-->
-            <!--android:layout_marginEnd="33dp"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_alignParentBottom="true"/>-->
+    </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

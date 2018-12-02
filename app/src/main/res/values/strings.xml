@@ -23,5 +23,16 @@
     <string name="spinner">spinner</string>
     <string name="activityicon">activityIcon</string>
     <string name="actionbarspinner">actionBarSpinner</string>
+    <string name="pressureImage">pressureImage</string>
+    <string name="windDirectionImage">windDirectionImage</string>
+    <string name="humidityImage">humidityImage</string>
+    <string name="username">Username</string>
+    <string name="sign_in">Sign in</string>
+    <string name="register">Register</string>
+    <string name="whatstheweather">WhatsTheWeather</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="your_email">Your email</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

@@ -16,7 +16,6 @@ public class ContextMenuRecyclerView extends RecyclerView {
 
     private RecyclerContextMenuInfo mContextMenuInfo;
 
-
     public ContextMenuRecyclerView(@NonNull Context context) {
         super(context);
     }

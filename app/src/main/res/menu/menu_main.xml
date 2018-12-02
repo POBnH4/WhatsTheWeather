@@ -8,12 +8,6 @@
           android:icon="@android:drawable/ic_menu_search"
           app:showAsAction="always"
           app:actionViewClass="android.support.v7.widget.SearchView" tools:ignore="AlwaysShowAction"/>
-
-    <item android:id="@+id/actionBarSpinner"
-          android:title = "@string/actionbarspinner"
-          app:showAsAction="always"
-          app:actionViewClass="android.widget.Spinner"/>
-
     <item android:title="@string/preferences"
           android:id="@+id/preferencesItem"
           android:orderInCategory="100"

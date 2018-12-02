@@ -28,41 +28,28 @@ import android.widget.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
 import static android.support.v7.widget.SearchView.OnClickListener;
 import static android.support.v7.widget.SearchView.OnQueryTextListener;
-import static com.example.peterboncheff.coursework.LoginActivity.USE_CURRENT_USER_DATA;
 import static java.lang.String.format;
-import static java.lang.String.valueOf;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, Serializable {
-
-    /**
-     * USE ?
-     */
-    enum Days {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-    }
+public class MainActivity extends AppCompatActivity implements OnClickListener, Serializable, SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int TOTAL_TABS = 3, PLUS_ONE_POSITION = 1, NO_MORE_DATA = -1;
     private static final String SNACK_BAR_TEXT = "Replace with your own action", ACTION_TEST = "Action";
     private final String TOAST_TEXT = "Couldn't find the weather";
-    private final String DEFAULT_CITY = "Dubai";
     static final String NEW_LINE = "\n";
     static final String DATE_FORMAT = "hh:mm:ss", INVALID_CITY = "Couldn't find city", TAG = "hallo";
     static final String API_JSON_TEMP = "temp", INTERNET_ERROR = "No internet connection";
     static final String BEGINNING_API_HTTP = "http://api.openweathermap.org/data/2.5/forecast?q=";
     static final String END_OF_API_HTTP = "&units=metric&appid=421389c958155f9c8ed14a5b0010c202";
-    //http://api.openweathermap.org/data/2.5/forecast?q=     &units=metric&appid=421389c958155f9c8ed14a5b0010c202
+    //http://api.openweathermap.org/data/2.5/forecast?q=     &units=metric&appid=421389c958155f9c8ed14a5b0010c202 link for API
 
     private final String GREY_COLOR = "#95a5a5", RED_COLOR = "#e84c3d", YELLOW_COLOR = "#dccc0b", BLUE_COLOR = "#125c67";
     private final String DARK_RED_COLOR_TYPE_ONE = "#a31f13", DARK_RED_COLOR_TYPE_TWO = "#db2b1b", BRIGHT_RED_COLOR_TYPE_ONE = "#ea594b";
@@ -72,58 +59,63 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private final String DARK_BLUE_COLOR_TYPE_ONE = "#2a6a74", DARK_BLUE_COLOR_TYPE_TWO = "#2a6a74", BRIGHT_BLUE_COLOR_TYPE_ONE = "#1a8c9b";
     private final String BRIGHT_BLUE_COLOR_TYPE_TWO = "#518289";
 
+    final static String API_JSON_DESCRIPTION = "description", API_JSON_HUMIDITY = "humidity", API_FORECAST_LIST = "list", API_SELECT_DATE = "dt_txt";
+    final static String API_JSON_PRESSURE = "pressure", API_JSON_COUNTRY = "country", API_JSON_WIND_SPEED = "speed", API_SELECT_CITY = "city";
+    final static String API_SELECT_WIND = "wind", API_SELECT_WEATHER = "weather", API_NAME_OF_CITY = "name";
+    final static String API_SELECT_MAIN_ARRAY = "main";
+
+    final static String SAVED_CURRENT_LOCATION = "currentLocation", SAVED_LAST_UPDATED = "lastUpdated";
+    final String SAVED_HUMIDITY = "humidity", SAVED_PRESSURE = "pressure", SAVED_WIND_SPEED = "windSpeed";
+    final String SAVED_CURRENT_TEMP = "temp";
+
     private final String SCATTERED_CLOUDS = "scattered clouds", BROKEN_CLOUDS = "broken clouds", FEW_CLOUDS = "few clouds";
     private final String SHOWER_RAIN = "shower rain", RAIN = "rain", THUNDERSTORM = "thunderstorm";
-    private final String ONE_DECIMAL_FORMAT_PATTERN = "#.0", DATE_FORMAT_PATTERN = "yyyy-MM-dd hh:mm:ss";
-    private final DecimalFormat ONE_DECIMAL_PLACE = new DecimalFormat(ONE_DECIMAL_FORMAT_PATTERN);
-    private final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+    private static final String ONE_DECIMAL_FORMAT_PATTERN = "#.0", DATE_FORMAT_PATTERN = "yyyy-MM-dd hh:mm:ss";
+    private static final Date DATE = new Date();
+    private static final DecimalFormat ONE_DECIMAL_PLACE = new DecimalFormat(ONE_DECIMAL_FORMAT_PATTERN);
+    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_PATTERN);
     private final String TEMP_FORMAT_CELSIUS = "%s°";
     static boolean DISPLAY_TEMPERATURE_IN_CELSIUS = true;
+    final static int DAYS_REQUIRED = 6, GET_CURRENT_DAY = 0;
+    final static int ITERATE_IN_ADVANCE = 100; //Random big number, since the data in the json file is for every 3 hours,
+    // we iterate taking only one forecast for a day, thus till we get the data for 5 different days
 
-    //Celsius to Fahrenheit formula -> (1°C × 9/5) + 32 = 33.8°F | symbol -> &#8457;
+    private final static SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT);
+    final static String CURRENT_TIME = SIMPLE_DATE_FORMAT.format(DATE);
 
-    final String API_JSON_DESCRIPTION = "description", API_JSON_HUMIDITY = "humidity", API_FORECAST_LIST = "list", API_SELECT_DATE = "dt_txt";
-    final String API_JSON_PRESSURE = "pressure", API_JSON_COUNTRY = "country", API_JSON_WIND_SPEED = "speed", API_SELECT_CITY = "city";
-    final String API_SELECT_MAIN_ARRAY = "main", API_SELECT_WIND = "wind", API_SELECT_WEATHER = "weather", API_NAME_OF_CITY = "name";
-    final int GET_CURRENT_DAY = 0, SELECT_FIRST = 0;
+    final static String CURRENT_LOCATION_FORMAT = "%s,%s", LAST_UPDATED_FORMAT = "Last updated %s";
+    private final static String HUMIDITY_FORMAT = "%s", PRESSURE_FORMAT = "%s hPa", SEPARATOR = ", ";
 
+    final static int SELECT_FIRST = 0;
+
+    private SharedPreferences sharedPrefs;
     private ActionBar actionBar;
 
     private ConstraintLayout mainLayout;
     private Button refreshButton;
     private TextView currentLocation, lastUpdated, currentTemperature, humidityTextField, pressureTextField, windTextField;
     private ImageView mainIcon;
-    private HorizontalScrollView daysOfTheWeekHorizontalScrollView;
     private String currentLocationIs = "Dubai", currentLocationIsCheck = "Dubai";
 
-    private LinearLayout dayOfWeekOneLayout, dayOfWeekTwoLayout, dayOfWeekThreeLayout, dayOfWeekFourLayout, dayOfWeekFiveLayout;
+    private LinearLayout dayOfWeekOneLayout, dayOfWeekTwoLayout, dayOfWeekFourLayout, dayOfWeekFiveLayout;
     private TextView dayOfWeekOneName, dayOfWeekTwoName, dayOfWeekThreeName, dayOfWeekFourName, dayOfWeekFiveName;
     private TextView daysOfWeekOneTemp, daysOfWeekTwoTemp, daysOfWeekThreeTemp, daysOfWeekFourTemp, daysOfWeekFiveTemp;
     private ImageView dayOfWeekOneIcon, dayOfWeekTwoIcon, dayOfWeekThreeIcon, dayOfWeekFourIcon, dayOfWeekFiveIcon;
 
     private User currentUser;
-    private ModuleDao moduleDao;
+    private final String SHARED_PREF_MAIN_ACTIVITY = "sharedPrefMain";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         final String HEADER_TITLE = "";
         setTitle(HEADER_TITLE);
         setContentView(R.layout.activity_main);
-        taskLoadUp(DEFAULT_CITY);
         init();
-
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean switchPref = sharedPref.getBoolean(SettingsActivity.KEY_PREF_EXAMPLE_SWITCH, false);
-        //SharedPreferences preferences = getSharedPreferences(SettingsFragment.SETTINGS_SHARED_PREFERENCES_FILE_NAME, Context.MODE_PRIVATE);
-
-        //set up database;
-        ModuleDatabase db = ModuleDatabase.getDatabase(this);
-        this.moduleDao = db.moduleDao();
-
-        Log.d(TAG, Boolean.toString(switchPref) + "-> switch changed");
+        setUpSharedPreferences();
+        setUpDatabase();
+        callSharedPreferences();
     }
 
     private void init() {
@@ -137,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         this.currentTemperature = findViewById(R.id.currentTemperature);
         this.mainIcon = findViewById(R.id.mainIcon);
         this.refreshButton = findViewById(R.id.refreshButton);
-        this.daysOfTheWeekHorizontalScrollView = findViewById(R.id.daysOfTheWeek);
 
         this.refreshButton.setOnClickListener(this);
         this.refreshButton.setBackgroundResource(R.drawable.ic_refresh);
@@ -147,10 +138,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         assert this.actionBar != null;
         this.actionBar.setElevation(SET_HEADER_ELEVATION);
 
-        Intent intent = getIntent();
-        this.currentUser = (User) intent.getSerializableExtra(USE_CURRENT_USER_DATA);
+        //Intent intent = getIntent();
+        // this.currentUser = (User) intent.getSerializableExtra(USE_CURRENT_USER_DATA);
 
         setDaysOfWeekVariables();
+    }
+
+    private void setUpDatabase(){
+        ModuleDatabase db = ModuleDatabase.getDatabase(this);
+        ModuleDao moduleDao = db.moduleDao();
+    }
+
+    private void setUpSharedPreferences(){
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        this.sharedPrefs = getSharedPreferences(SHARED_PREF_MAIN_ACTIVITY, Context.MODE_PRIVATE);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        int newValue = sharedPreferences.getInt(key, Integer.MAX_VALUE);
+        Log.d(TAG, String.format("Key %s change to %d", key, newValue));
+    }
+
+    private void callSharedPreferences(){
+        final String DEFAULT_LAST_UPDATED = "",DEFAULT_CITY = "Dubai";
+        this.sharedPrefs = getSharedPreferences(SHARED_PREF_MAIN_ACTIVITY,Context.MODE_PRIVATE);
+        this.sharedPrefs.getString(SAVED_CURRENT_LOCATION, DEFAULT_CITY);
+        this.sharedPrefs.getString(SAVED_LAST_UPDATED, DEFAULT_LAST_UPDATED);
+        String currentCity = this.sharedPrefs.getString(SAVED_CURRENT_LOCATION, DEFAULT_CITY);
+        Log.d(TAG, "Call shared preferences " + currentCity + " called!");
+        taskLoadUp(currentCity);
     }
 
     /**
@@ -163,8 +180,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         final SearchView searchView = (SearchView) menu.findItem(R.id.actionBarMenuSearch).getActionView();
         assert searchManager != null;
-        MenuItem actionBarSpinner = menu.findItem(R.id.actionBarSpinner);
-        // spinner stuff continue.....
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new OnQueryTextListener() {
             @Override
@@ -206,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private void setDaysOfWeekVariables() {
         this.dayOfWeekOneLayout = findViewById(R.id.dayOfWeekOneLayout);
         this.dayOfWeekTwoLayout = findViewById(R.id.dayOfWeekTwoLayout);
-        this.dayOfWeekThreeLayout = findViewById(R.id.dayOfWeekThreeLayout);
         this.dayOfWeekFourLayout = findViewById(R.id.dayOfWeekFourLayout);
         this.dayOfWeekFiveLayout = findViewById(R.id.dayOfWeekFiveLayout);
 
@@ -246,15 +260,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private String convertToCelsius(String temperatureInFahrenheit) {
         double temperatureInF = Double.parseDouble(temperatureInFahrenheit.substring(0, temperatureInFahrenheit.length() - 1));
         double formula = (temperatureInF - 32) * 5 / 9; // For instance, (33.8°F − 32) × 5/9 = 1°C;
-        Log.d(TAG, "FAHRENHEIT TO CEL: " + temperatureInF);
+        //Log.d(TAG, "FAHRENHEIT TO CEL: " + temperatureInF);
         return ONE_DECIMAL_PLACE.format(formula);
     }
 
     private String convertToFahrenheit(String temperatureInCelsius) {
         double temperatureInC = Double.parseDouble(temperatureInCelsius.substring(0, temperatureInCelsius.length() - 1));
         double formula = (temperatureInC * 9 / 5) + 32; // For instance, (1°C × 9/5) + 32 = 33.8°F;
-        Log.d(TAG, "CELSIUS TO FAHREN: " + temperatureInC);
-
+        //Log.d(TAG, "CELSIUS TO FAHRENHEIT: " + temperatureInC);
         return ONE_DECIMAL_PLACE.format(formula);
     }
 
@@ -289,20 +302,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
          */
         @Override
         protected void onPostExecute(String query) {
-
-            final String CURRENT_LOCATION_FORMAT = "%s,%s", LAST_UPDATED_FORMAT = "Last updated %s";
-            final String HUMIDITY_FORMAT = "%s", PRESSURE_FORMAT = "%s hPa", SEPARATOR = ", ";
-
-            final Date DATE = new Date();
-            final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_FORMAT);
-            final String CURRENT_TIME = SIMPLE_DATE_FORMAT.format(DATE);
             try {
-                JSONObject json = new JSONObject(query);
-                JSONObject forecastMain = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONObject(API_SELECT_MAIN_ARRAY);
-                JSONObject forecastWeather = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONArray(API_SELECT_WEATHER).getJSONObject(SELECT_FIRST);
-                JSONObject forecastWind = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONObject(API_SELECT_WIND);
-                JSONObject forecastDateInfo = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY);
-                JSONObject city = json.getJSONObject(API_SELECT_CITY);
+                final JSONObject json = new JSONObject(query);
+                final JSONObject forecastMain = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONObject(API_SELECT_MAIN_ARRAY);
+                final JSONObject forecastWeather = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONArray(API_SELECT_WEATHER).getJSONObject(SELECT_FIRST);
+                final JSONObject forecastWind = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY).getJSONObject(API_SELECT_WIND);
+                final JSONObject forecastDateInfo = json.getJSONArray(API_FORECAST_LIST).getJSONObject(GET_CURRENT_DAY);
+                final JSONObject city = json.getJSONObject(API_SELECT_CITY);
 
                 final String CITY = city.getString(API_NAME_OF_CITY).toUpperCase(), COUNTRY_CODE = city.getString(API_JSON_COUNTRY);
                 final String HUMIDITY = forecastMain.getString(API_JSON_HUMIDITY), PRESSURE = forecastMain.getString(API_JSON_PRESSURE);
@@ -317,11 +323,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 pressureTextField.setText(format(PRESSURE_FORMAT, PRESSURE));
                 windTextField.setText(WIND_SPEED);
 
-                setPhoneBackgroundColor(forecastWeather.getString(API_JSON_DESCRIPTION), checkDayOrNight(CURRENT_TIME));
-                saveCurrentLocation(CURRENT_LOCATION, CURRENT_TIME, TEMPERATURE, HUMIDITY, PRESSURE, WIND_SPEED);
-                Log.d(TAG, "calendar " + GET_DATE);
+                setPhoneBackgroundColor(forecastWeather.getString(API_JSON_DESCRIPTION), checkDayOrNight());
+                saveCurrentLocation(CURRENT_LOCATION, TEMPERATURE, HUMIDITY, PRESSURE, WIND_SPEED);
 
-                parseDayOfWeekName(GET_DATE);
+                parseDayOfWeekName(GET_DATE, dayOfWeekOneName, dayOfWeekTwoName, dayOfWeekThreeName, dayOfWeekFourName, dayOfWeekFiveName);
                 setHorizontalViewAttributes(json, GET_DATE);
                 currentLocationIs = currentLocationIsCheck; // if the location is invalid -> an exception
                 // will be thrown and currentLocationIs WON'T be set to be a location that is invalid;
@@ -338,9 +343,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
      * Set horizontal attributes using parsed json data
      */
     private void setHorizontalViewAttributes(JSONObject json, final String GET_DATE) {
-        final int DAYS_REQUIRED = 6, GET_CURRENT_DAY = 0;
-        final int ITERATE_IN_ADVANCE = 100; //since the data in the json file is for every 3 hours,
-        // we iterate taking only one forecast for a day, thus till we get the data for 5 different days
         int daysCovered = 0; // once daysCovered becomes 5 it breaks the loop
         String dateCheckStore = GET_DATE;
         try {
@@ -364,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     /**
      * Makes sure that the data is for each day not for every 3 hours
      */
-    private boolean checkDateValidity(String date, String dateCheckStore) {
+    static boolean checkDateValidity(String date, String dateCheckStore) {
         final int DATE_INDEX_ONE = 0, DATE_LAST_INDEX = 10; //the json file parses date that
         // is in a format yyyy-MM-dd hh-mm-ss so we cut of the part that we don't need -> "  hh-mm-ss";
         return !date.substring(DATE_INDEX_ONE, DATE_LAST_INDEX).equals(dateCheckStore.substring(DATE_INDEX_ONE, DATE_LAST_INDEX));
@@ -373,38 +375,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     /**
      * parse day of the week for a certain date in the past
      */
-    private void parseDayOfWeekName(String forecastDateInfo) {
+    static void parseDayOfWeekName(String forecastDateInfo, TextView... textViews) {
         try {
+            ArrayList<TextView> array = new ArrayList<>(Arrays.asList(textViews));
             final Date date = dateFormat.parse(forecastDateInfo);
             final Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
-            setDaysOfWeekNames(calendar.get(Calendar.DAY_OF_WEEK));
+            setDaysOfWeekNames(calendar.get(Calendar.DAY_OF_WEEK), array);
             Log.d(TAG, "calendar " + calendar.get(Calendar.DAY_OF_WEEK));
         } catch (ParseException e) {
             e.printStackTrace();
             Log.d(TAG, "calendar error");
-
         }
     }
 
     /**
      * set horizontal front view days of week text
      */
-    private void setDaysOfWeekNames(int day) {
+    private static void setDaysOfWeekNames(int day, ArrayList<TextView> textViews) {
         final int DAYS_IN_A_WEEK = 7, FIRST_DAY_OF_THE_WEEK = 1;
-        this.dayOfWeekOneName.setText(getNameOfWeekDay(day));
-        this.dayOfWeekTwoName.setText(getNameOfWeekDay((day >= DAYS_IN_A_WEEK) ? day = FIRST_DAY_OF_THE_WEEK : ++day));
-        this.dayOfWeekThreeName.setText(getNameOfWeekDay((day >= DAYS_IN_A_WEEK) ? day = FIRST_DAY_OF_THE_WEEK : ++day));
-        this.dayOfWeekFourName.setText(getNameOfWeekDay((day >= DAYS_IN_A_WEEK) ? day = FIRST_DAY_OF_THE_WEEK : ++day));
-        Log.d(TAG, "Before -> " + dayOfWeekFiveName.getText().toString());
-        this.dayOfWeekFiveName.setText(getNameOfWeekDay((day >= DAYS_IN_A_WEEK) ? FIRST_DAY_OF_THE_WEEK : ++day));
-        Log.d(TAG, "Now -> " + dayOfWeekFiveName.getText().toString());
+        for (int i = 0; i < textViews.size(); i++) {
+            if (i == 0) textViews.get(i).setText(getNameOfWeekDay(day));
+            else textViews.get(i)
+                    .setText(getNameOfWeekDay((day >= DAYS_IN_A_WEEK) ? day = FIRST_DAY_OF_THE_WEEK : ++day));
+        }
     }
 
     /**
      * Return name of the day
      */
-    private String getNameOfWeekDay(int day) {
+    private static String getNameOfWeekDay(int day) {
         final int FIRST_DAY_OF_THE_WEEK = 1, SECOND_DAY_OF_THE_WEEK = 2, THIRD_DAY_OF_THE_WEEK = 3;
         final int FOURTH_DAY_OF_THE_WEEK = 4, FIFTH_DAY_OF_THE_WEEK = 5, SIXTH_DAY_OF_THE_WEEK = 6;
         final String SUNDAY = "\t\tSunday", MONDAY = "\t\tMonday", TUESDAY = "\t\tTuesday", WEDNESDAY = "\t Wednesday";
@@ -428,28 +428,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     }
 
     /**
-     * Save main activity variables/icons/colors for current user
+     * Shared Preferences main activity variables/icons/colors for current user
      */
-    private void saveCurrentLocation(String currentLocation, String lastUpdated,
-                                     double currentTemperature, String humidity, String pressure, String windSpeed) {
+    private void saveCurrentLocation(String currentLocation, double currentTemperature, String humidity, String pressure, String windSpeed) {
+
+        SharedPreferences.Editor editor = this.sharedPrefs.edit();
+        editor.putString(SAVED_CURRENT_LOCATION, currentLocation);
+        editor.putString(SAVED_LAST_UPDATED, MainActivity.CURRENT_TIME);
+        editor.putString(SAVED_CURRENT_TEMP, String.valueOf(currentTemperature));
+        editor.putString(SAVED_HUMIDITY, humidity);
+        editor.putString(SAVED_PRESSURE, pressure);
+        editor.putString(SAVED_WIND_SPEED, windSpeed);
+        editor.apply();
 
         //Module mainModule = new Module();
         //m.setReference();
         //mainModule.setCreatedOn(new Date());
         //mainModule.setScqfCredits(1);
-        //MainActivity.InsertModuleTask task = new MainActivity();
         //task.execute(m);
     }
 
     /**
      * if the time is 20:00 - 6:00 set night icons, else day icons
      */
-    private boolean checkDayOrNight(String time) {
+    private boolean checkDayOrNight() {
         final int NIGHT_TIME = 20, MORNING_TIME = 6; //20:00 represents 08:00PM and 6 represents 06:00AM;
         final int FIRST_HOUR_CHARACTER = 0, SECOND_HOUR_CHARACTER = 1, CHECK_WHETHER_TIME_IS_AM = 0;
-        int hour = time.charAt(FIRST_HOUR_CHARACTER) + time.charAt(SECOND_HOUR_CHARACTER);
-        if (time.charAt(FIRST_HOUR_CHARACTER) == CHECK_WHETHER_TIME_IS_AM) hour = time.charAt(SECOND_HOUR_CHARACTER);
-        return hour >= NIGHT_TIME || hour <= MORNING_TIME; // true = night, false = day;
+        int hour = MainActivity.CURRENT_TIME.charAt(FIRST_HOUR_CHARACTER) + MainActivity.CURRENT_TIME.charAt(SECOND_HOUR_CHARACTER);
+        if (MainActivity.CURRENT_TIME.charAt(FIRST_HOUR_CHARACTER) == CHECK_WHETHER_TIME_IS_AM) hour = MainActivity.CURRENT_TIME.charAt(SECOND_HOUR_CHARACTER);
+        //return hour >= NIGHT_TIME || hour <= MORNING_TIME; // true = night, false = day;
+        return false;
     }
 
     /**
@@ -549,7 +557,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             mainIcon.setImageResource(R.drawable.cloudy);
             currentMainColor = BLUE_COLOR;
         } else if (weather.equalsIgnoreCase(FEW_CLOUDS)) {
-            if (night) {
+            if (!night) {
                 currentMainColor = YELLOW_COLOR;
                 mainLayout.setBackgroundColor(Color.parseColor(YELLOW_COLOR));
                 actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(YELLOW_COLOR)));
@@ -584,45 +592,17 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
      * Check for internet connection
      */
     static boolean checkNetworkAvailability(Context context) {
-        return ((ConnectivityManager) Objects.requireNonNull(context.getSystemService(Context.CONNECTIVITY_SERVICE))).getActiveNetworkInfo() != null;
+        return ((ConnectivityManager)
+                Objects.requireNonNull
+                        (context.getSystemService(Context.CONNECTIVITY_SERVICE)))
+                                                .getActiveNetworkInfo() != null;
     }
 
     /**
      * Get and parse the json info
      */
     static String execute(String http) {
-        HttpURLConnection connection = null;
-        try {
-            URL url = new URL(http);
-            connection = (HttpURLConnection) url.openConnection();
-            final String CONTENT_TYPE = "content-type", APPLICATION_JSON_CHARSET = "application/json; charset=utf-8";
-            final String CONTENT_LANGUAGE = "Content-Language", LANGUAGE = "en-GB";
-            connection.setRequestProperty(CONTENT_TYPE, APPLICATION_JSON_CHARSET);
-            connection.setRequestProperty(CONTENT_LANGUAGE, LANGUAGE);
-            connection.setUseCaches(false);
-            connection.setDoInput(true);
-            connection.setDoOutput(false);
-
-            InputStream in;
-            int status = connection.getResponseCode();
-            if (status != HttpURLConnection.HTTP_OK) in = connection.getErrorStream();
-            else in = connection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            StringBuilder response = new StringBuilder();
-
-            while ((line = bufferedReader.readLine()) != null) {
-                response.append(line);
-                response.append(NEW_LINE);
-            }
-            bufferedReader.close();
-            return valueOf(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            if (connection != null) connection.disconnect();
-        }
+        HttpConnection httpConnection = new HttpConnection(http);
+        return httpConnection.connectAndParseJson();
     }
-
 }

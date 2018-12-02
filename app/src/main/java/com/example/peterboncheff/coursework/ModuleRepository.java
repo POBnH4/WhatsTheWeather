@@ -3,8 +3,11 @@ package com.example.peterboncheff.coursework;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
+
+import static com.example.peterboncheff.coursework.MainActivity.TAG;
 
 public class ModuleRepository {
 
@@ -16,7 +19,7 @@ public class ModuleRepository {
         this.observableModules = this.database.moduleDao().getAllModules();
     }
 
-    public static ModuleRepository getInstance(final ModuleDatabase database){
+    static ModuleRepository getInstance(final ModuleDatabase database){
         if(INSTANCE == null){
             synchronized (ModuleRepository.class){
                 if(INSTANCE == null){
@@ -27,7 +30,7 @@ public class ModuleRepository {
         return INSTANCE;
     }
 
-    public LiveData<List<Module>> getModules(){
+    LiveData<List<Module>> getModules(){
         return observableModules;
     }
 
