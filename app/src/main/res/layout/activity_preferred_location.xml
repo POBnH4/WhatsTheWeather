@@ -114,7 +114,7 @@
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/tableLayout"
                 app:layout_constraintVertical_bias="0.555"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="68dp"
                 android:layout_height="27dp"
                 android:textColor="#FFFFFF"
@@ -123,7 +123,7 @@
                 android:layout_marginEnd="8dp" android:layout_marginTop="56dp"
                 app:layout_constraintTop_toBottomOf="@+id/preferenceLayoutSearch"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="67dp"
                 android:layout_height="26dp"
                 android:textColor="#FFFFFF"
@@ -131,7 +131,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/prefLocationDayOneTemp"
                 app:layout_constraintEnd_toStartOf="@+id/tableLayout" android:layout_marginEnd="8dp"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="66dp"
                 android:layout_height="24dp"
                 android:textColor="#FFFFFF"
@@ -141,7 +141,7 @@
                 android:layout_marginStart="12dp" android:layout_marginTop="56dp"
                 app:layout_constraintTop_toBottomOf="@+id/prefLocationDayTwoTemp"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="66dp"
                 android:layout_height="26dp"
                 android:textColor="#FFFFFF"
@@ -150,7 +150,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/tableLayout" android:layout_marginEnd="8dp"
                 android:layout_marginTop="52dp" app:layout_constraintTop_toBottomOf="@+id/prefLocationDayThreeTemp"/>
         <TextView
-                android:text="TextView"
+                android:text=""
                 android:layout_width="63dp"
                 android:layout_height="23dp"
                 android:textColor="#FFFFFF"
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content" tools:layout_editor_absoluteY="96dp"
                     tools:layout_editor_absoluteX="217dp">
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="33dp"
                         android:layout_height="28dp"
                         android:layout_marginEnd="8dp"
@@ -210,7 +210,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayOneWind"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="35dp"
                         android:layout_marginEnd="8dp"
                         android:textColor="#FFFFFF"
@@ -218,7 +218,7 @@
                         android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayOneHumidity"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:textColor="#FFFFFF"
@@ -227,7 +227,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="300dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -242,7 +242,7 @@
                     tools:layout_editor_absoluteY="96dp"
                     tools:layout_editor_absoluteX="217dp">
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="33dp"
                         android:layout_height="28dp"
                         android:layout_marginEnd="8dp"
@@ -251,7 +251,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayTwoWind"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="35dp"
                         android:layout_marginEnd="8dp"
                         android:textColor="#FFFFFF"
@@ -259,7 +259,7 @@
                         android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayTwoHumidity"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="30dp"
                         android:layout_marginEnd="8dp"
                         android:textColor="#FFFFFF"
@@ -268,7 +268,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="300dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="31dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -283,7 +283,7 @@
                     tools:layout_editor_absoluteY="96dp"
                     tools:layout_editor_absoluteX="217dp">
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="33dp"
                         android:layout_height="28dp"
                         android:textColor="#FFFFFF"
@@ -292,7 +292,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayThreeWind"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="35dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -300,7 +300,7 @@
                         android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayThreeHumidity"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="30dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -309,7 +309,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="300dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="31dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -324,7 +324,7 @@
                     tools:layout_editor_absoluteY="96dp"
                     tools:layout_editor_absoluteX="217dp">
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="33dp"
                         android:layout_height="28dp"
                         android:textColor="#FFFFFF"
@@ -333,7 +333,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayFourWind"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="35dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -341,7 +341,7 @@
                         android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayFourHumidity"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="30dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -350,7 +350,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="300dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="31dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -365,7 +365,7 @@
                     tools:layout_editor_absoluteY="96dp"
                     tools:layout_editor_absoluteX="217dp">
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="33dp"
                         android:layout_height="28dp"
                         android:textColor="#FFFFFF"
@@ -374,7 +374,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="219dp" android:id="@+id/prefLocationDayFiveWind"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="35dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -382,7 +382,7 @@
                         android:layout_height="28dp" tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="258dp" android:id="@+id/prefLocationDayFiveHumidity"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="30dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
@@ -391,7 +391,7 @@
                         tools:layout_editor_absoluteY="98dp"
                         tools:layout_editor_absoluteX="300dp"/>
                 <TextView
-                        android:text="TextView"
+                        android:text=""
                         android:layout_width="31dp"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
